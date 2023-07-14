@@ -7,4 +7,4 @@ def multiple_returns(sentence):
         set_length = 0
         first_letter = None
 
-        treturn tuple((set_length, first_letter))
+        return tuple((set_length, first_letter))
