@@ -6,6 +6,6 @@ def print_matrix_integer(matrix=[[]]):
         else:
             for i in sublist:
                 if i == sublist[-1]:
-                   print("{:d}".format(i))
+                    print("{:d}".format(i))
                 else:
-                   print("{:d}".format(i), end=" ")
+                    print("{:d}".format(i), end=" ")
