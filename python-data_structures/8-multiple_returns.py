@@ -1,10 +1,8 @@
 #!/usr/bin/python3
 def multiple_returns(sentence):
-    if sentence:
-        set_length = len(sentence)
-        first_letter = sentence[0]
+    sentence_len = len(sentence)
+    if sentence_len == 0:
+        new_tuple = (sentence_len, None)
     else:
-        set_length = 0
-        first_letter = None
-
-        return tuple((set_length, first_letter))
+        new_tuple = (sentence_len, sentence[0])
+    return new_tuple
