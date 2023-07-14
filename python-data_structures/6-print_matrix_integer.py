@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 def print_matrix_integer(matrix=[[]]):
     for sublist in matrix:
-        counter = 0
+        i = 0
         for i in sublist:
-            if counter == (len(sublist) - 1):
+            if i == (len(sublist) - 1):
                 print("{:d}".format(i))
             else:
                 print("{:d}".format(i), end=" ")
-            counter += 1
+            i+=1
             print("")
