@@ -2,6 +2,6 @@
 def weight_average(my_list=[]):
     if my_list == []:
         return 0
-        numerator = [tuple[0] * tuple[1] for tuple in my_list]
-        denominator = [tuple[1] for tuple in my_list]
-        return (sum(numerator) / sum(denominator))
+        num = [tuple[0] * tuple[1] for tuple in my_list]
+        den = [tuple[1] for tuple in my_list]
+        return (sum(num)/sum(den))
