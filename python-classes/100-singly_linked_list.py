@@ -56,7 +56,7 @@ class SinglyLinkedList:
     def sorted_insert(self, value):
         ptr = self.__head
 
-         while ptr is not None:
+        while ptr is not None:
             if ptr.data > value:
                 break
             ptr_prev = ptr
