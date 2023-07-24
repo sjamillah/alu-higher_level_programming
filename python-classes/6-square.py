@@ -52,7 +52,7 @@ class Square:
     @property
     def position(self):
         """ Method to show position of the size """
-            return self.__position
+        return self.__position
 
     @position.setter
     def position(self, value):
