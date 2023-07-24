@@ -52,7 +52,7 @@ class Rectangle:
             return r_perimeter
 
     def __del__(self):
-        """Detects the deletion of an instance and returns bye when deleted"""
+        """ Detects the deletion of an instance and returns bye when deleted """
         print("Bye rectangle...")
 
     def __str__(self):
@@ -69,5 +69,5 @@ class Rectangle:
             return rect[:-1]
 
     def __repr__(self):
-        """Prints the string representation to be able to recreate a new instance"        ""
+        """Prints the string representation officially"""
         return "Rectangle({}, {})".format(self.__width, self.__height)
