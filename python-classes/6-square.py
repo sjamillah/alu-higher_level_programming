@@ -6,9 +6,9 @@ class Square:
     """ Defines a square """
 
     def __init__(self, size=0, position=(0, 0)):
-         """ Method to initialize the variables """
-         self.__size = size
-         self.__position = position
+        """ Method to initialize the variables """
+        self.__size = size
+        self.__position = position
 
     @property
     def size(self):
@@ -64,7 +64,6 @@ class Square:
         if value[0] < 0 or value[1] < 0:
             raise TypeError("position must be a tuple of 2 positive integers")
         self.__position = value
-
 
     def my_print(self):
         """ Method that prints a # square according to the size value """
