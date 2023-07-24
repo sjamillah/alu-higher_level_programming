@@ -50,12 +50,8 @@ class Square:
         """ Method that prints a # square according to the size value """
         if self.size == 0:
             print("")
-        else:
-            for i in range(self.position[1]):
-                print("")
-            for n in range(self.size):
-                for m in range(self.position[0]):
-                    print(' ', end='')
-                    for o in range(self.size):
-                        print("#" * self.size)
-                    print()
+            return
+
+        print("\n" * self.position[1], end="")
+        for i in range(self.size):
+            print(" " * self.position[0] + "#" * self.size)
