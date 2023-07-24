@@ -63,6 +63,7 @@ class Rectangle:
 
                 rect += '\n'
             return rect[:-1]
+
     def __repr__(self):
         """Prints the string representation of the rectangle officially"""
         return "Rectangle({}, {})".format(self.__width, self.__height)
