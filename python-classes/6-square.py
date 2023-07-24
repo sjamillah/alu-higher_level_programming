@@ -5,14 +5,10 @@
 class Square:
     """ Defines a square """
 
-     def __init__(self, size=0, position=(0, 0)):
+    def __init__(self, size=0, position=(0, 0)):
          """ Method to initialize the square object """
          self.__size = size
          self.__position = position
-
-    def area(self):
-        square_area = self.__size ** 2
-        return square_area
 
     @property
     def size(self):
