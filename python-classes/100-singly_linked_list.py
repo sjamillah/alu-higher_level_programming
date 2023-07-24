@@ -39,7 +39,7 @@ class SinglyLinkedList:
     """ class to manage singly linked list operations """
 
     def __str__(self):
-        """ prints all the members of the singly linked list on a separate line """
+        """ prints the members of the singly linked list on a separate line """
         rtn = ""
         ptr = self.__head
 
