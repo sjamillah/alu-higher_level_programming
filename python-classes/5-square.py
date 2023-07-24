@@ -32,8 +32,8 @@ class Square:
         return square_area
 
     def my_print(self):
-        if size == 0:
-            print("")
+        if self.__size == 0:
+            print()
         else:
             for i in range(0, self.__size):
                 for j in range(self.__size):
