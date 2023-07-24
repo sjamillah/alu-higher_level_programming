@@ -40,12 +40,14 @@ class SinglyLinkedList:
         """ prints all the members of the singly linked list on a separate line """
         rtn = ""
         ptr = self.__head
+
         while ptr is not None:
             rtn += str(ptr.data)
             if ptr.next_node is not None:
                 rtn += "\n"
             ptr = ptr.next_node
-        return rtn
+
+    return rtn
 
     def __init__(self):
         """ initialization of data into the new singly linked list """
