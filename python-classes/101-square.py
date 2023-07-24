@@ -24,7 +24,7 @@ class Square:
         return rtn
 
     def __init__(self, size=0, position=(0, 0)):
-        """ Method to initialize the square object """
+        """ Method to initialize the variables """
         self.size = size
         self.position = position
 
@@ -32,6 +32,25 @@ class Square:
     def size(self):
         """ Method to returns the size value """
         return self.__size
+
+    @size.setter
+    def size(self, size):
+        """ Method to set the value of size """
+        if not isinstance(size, int):
+            raise TypeError("size must be an integer")
+        elif size < 0:
+            raise ValueError("size must be >= 0")
+        else:
+            self.__size = size
+
+    def area(self):
+        square_area = self.__size ** 2
+        return square_area
+
+    def __init__(self, size=0, position=(0, 0)):
+        """ Method to initialize the data """
+        self.size = size
+        self.position = position
 
     @size.setter
     def size(self, value):
@@ -49,22 +68,14 @@ class Square:
 
     @position.setter
     def position(self, value):
-        """ Method that sets the position value of a square object """
-        if not isinstance(value, tuple):
+        """ Method to set position """
+        if not isinstance(value, tuple) or len(value) != 2:
             raise TypeError("position must be a tuple of 2 positive integers")
-        if len(value) != 2:
-            raise TypeError("position must be a tuple of 2 positive integers")
-        if not isinstance(value[0], int):
-            raise TypeError("position must be a tuple of 2 positive integers")
-        if not isinstance(value[1], int):
+        if not isinstance(value[0], int) or not isinstance(value[1], int):
             raise TypeError("position must be a tuple of 2 positive integers")
         if value[0] < 0 or value[1] < 0:
             raise TypeError("position must be a tuple of 2 positive integers")
         self.__position = value
-
-    def area(self):
-        """ Method that returns the square are of the object """
-        return (self.__size ** 2)
 
     def my_print(self):
         """ Method that prints a # square according to the size value """
