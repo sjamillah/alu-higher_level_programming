@@ -4,6 +4,7 @@
 
 class Node:
     """ Node serves as a single linked list """
+
     def __init__(self, data, next_node=None):
         """ Initialization of new data """
         self.data = data
@@ -36,6 +37,7 @@ class Node:
 
 class SinglyLinkedList:
     """ class to manage singly linked list operations """
+
     def __str__(self):
         """ prints all the members of the singly linked list on a separate line """
         rtn = ""
@@ -47,7 +49,7 @@ class SinglyLinkedList:
                 rtn += "\n"
             ptr = ptr.next_node
 
-    return rtn
+        return rtn
 
     def __init__(self):
         """ initialization of data into the new singly linked list """
