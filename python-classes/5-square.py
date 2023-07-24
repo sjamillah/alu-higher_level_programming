@@ -12,7 +12,11 @@ class Square:
             raise ValueError("size must be >= 0")
         else:
             self.__size = int(size)
-       
+
+    def area(self):
+        square_area = self.__size ** 2
+        return square_area
+
     @property
     def size(self):
         """ Method to return the size value """
@@ -20,16 +24,13 @@ class Square:
 
     @size.setter
     def size(self, value):
+        """ Method to set the size value of the square object """
         if not isinstance(value, int):
             raise TypeError("size must be an integer")
         elif value < 0:
             raise ValueError("size must be >= 0")
         else:
             self.__size = value
-
-    def area(self):
-        square_area = self.__size ** 2
-        return square_area
 
     def my_print(self):
         if self.__size == 0:
