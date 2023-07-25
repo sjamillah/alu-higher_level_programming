@@ -2,7 +2,6 @@
 '''creates a new subclass from rectangle'''
 
 
-BaseGeometry = __import__('7-geometry').BaseGeometry
 Rectangle = __import__('9-rectangle').Rectangle
 
 
@@ -17,7 +16,7 @@ class Square(Rectangle):
 
     def area(self):
         '''Method to return the area'''
-        return super().area()
+        return self.__size ** 2
 
     def __str__(self):
         '''special method that returns a printable string'''
