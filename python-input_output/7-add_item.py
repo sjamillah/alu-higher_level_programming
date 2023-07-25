@@ -12,7 +12,5 @@ if __name__ == "__main__":
     except FileNotFoundError:
         loadFile = []
 
-    argc = len(sys.argv)
-    for idx in range(1, argc):
-        loadFile.append(sys.argv[idx])
-    save_to_json_file(loadFile, "add_item.json")
+        loadFile.append(sys.argv[1:])
+    save_to_json_file(loadFile, open("add_item.json", 'w'))
