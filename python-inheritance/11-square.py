@@ -20,4 +20,4 @@ class Square(Rectangle):
 
     def __str__(self):
         '''special method that returns a printable string'''
-        return f("[Square] {self.__size}/{self.__size}")
+        return f"[Square] {self.__size}/{self.__size}"
