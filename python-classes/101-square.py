@@ -5,19 +5,14 @@ class Square:
     """ A class that defines a square by its size """
 
     def __str__(self):
-        rtn = ""
 
         if self.size == 0:
-            return rtn
+            return ("")
 
-        for i in range(self.position[1]):
-            rtn += "\n"
-
+        rtn = "\n"* self.position[1]
         for i in range(0, self.size):
-            for k in range(self.position[0]):
-                rtn += " "
-            for j in range(self.size):
-                rtn += "#"
+                rtn += " " * self.position[0]
+                rtn += "#" * self.size
             if i is not (self.size - 1):
                 rtn += "\n"
 
@@ -34,32 +29,18 @@ class Square:
         return self.__size
 
     @size.setter
-    def size(self, size):
+    def size(self, value):
         """ Method to set the value of size """
-        if not isinstance(size, int):
+        if not isinstance(value, int):
             raise TypeError("size must be an integer")
-        elif size < 0:
+        elif value < 0:
             raise ValueError("size must be >= 0")
         else:
-            self.__size = size
+            self.__size = value
 
     def area(self):
         square_area = self.__size ** 2
         return square_area
-
-    def __init__(self, size=0, position=(0, 0)):
-        """ Method to initialize the data """
-        self.size = size
-        self.position = position
-
-    @size.setter
-    def size(self, value):
-        """ Method to set the size value of the square object """
-        if not isinstance(value, int):
-            raise TypeError("size must be an integer")
-        if value < 0:
-            raise ValueError("size must be >= 0")
-        self.__size = value
 
     @property
     def position(self):
