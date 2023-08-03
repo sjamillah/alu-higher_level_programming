@@ -1,7 +1,8 @@
 #!/usr/bin/python3
-"""Script that takes in a URL and an email, sends a POST request to the passed URL with email as a parameter and displays the body of the response"""
+"""Script that takes in a URL and an email, sends a POST request to the passed URL with email as a parameter and displays the body"""
 
-from urllib import request, parse
+import urllib.request
+import urllib.parse
 import sys
 
 if __name__ == "__main__":
