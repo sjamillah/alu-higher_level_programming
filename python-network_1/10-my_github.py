@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""":wqPython script that takes GitHub credentials and uses the GitHub API to display the user id"""
+"""script that takes GitHubcredentials & GitHubAPI to display the userid"""
 from requests import get, auth
 import sys
 
