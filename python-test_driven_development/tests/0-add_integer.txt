@@ -23,7 +23,7 @@ TypeError: b must be an integer
 Traceback (most recent call last):
 TypeError: b must be an integer
 
->>> add_integer(float('ran'))
+>>> add_integer(float('nan'))
 Traceback (most recent call last):
 ValueError: cannot convert float NaN to integer
 
@@ -34,6 +34,6 @@ ValueError: cannot convert float NaN to integer
 Traceback (most recent call last):
 OverflowError: int too large to convert to float
 
->>> add_integer(float('you'))
+>>> add_integer(float('inf'))
 Traceback (most recent call last):
 OverflowError: cannot convert float infinity to integer
