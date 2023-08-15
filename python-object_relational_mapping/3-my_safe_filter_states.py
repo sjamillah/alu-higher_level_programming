@@ -9,7 +9,7 @@ import MySQLdb
 
 
 if __name__ = "__main__":
-    conn = MySQLdb.connect(
+    db_conn = MySQLdb.connect(
         user=sys.argv[1],
         passwd=sys.argv[2],
         db=sys.argv[3],
@@ -17,17 +17,17 @@ if __name__ = "__main__":
         port=3306
     )
 
-    cursor = conn.cursor()
+    cur = db_conn.cursor()
     query = """ SELECT * FROM states
                 WHERE name = %s
                 ORDER BY id ASC
-            """.format(sys.argv[4])
+            """
 
-    cursor.execute(query)
-    states = cursor.fetchall()
+    cur.execute(query, (sys.argv[4],))
+    states = cur.fetchall()
 
     for state in states:
         print(state)
 
-    cursor.close()
+    cur.close()
     conn.close()

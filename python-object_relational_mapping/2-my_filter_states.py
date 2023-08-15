@@ -14,17 +14,17 @@ if __name__ = "__main__":
         port=3306
     )
 
-    cursor = conn.cursor()
+    cur = conn.cursor()
     query = """ SELECT * FROM states
-                WHERE BINARY name = '{}'
+                WHERE name LIKE BINARY 'N%'
                 ORDER BY id ASC
-            """.format(sys.argv[4])
+            """
     
-    cursor.execute(query)
-    states = cursor.fetchall()
+    cur.execute(query, (sys.argv[4],))
+    states = cur.fetchall()
     
     for state in states:
         print(state)
 
-    cursor.close()
+    cur.close()
     conn.close()
