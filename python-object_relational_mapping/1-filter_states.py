@@ -1,6 +1,8 @@
 #!/usr/bin/python3
-"""Script to list all states with a name starting with N in db"""
-
+"""
+Script to list all states with a
+name starting with N in db 
+"""
 import sys
 import MySQLdb
 
