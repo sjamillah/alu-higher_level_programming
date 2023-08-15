@@ -6,7 +6,7 @@ import MySQLdb
 
 
 if __name__ = "__main__":
-    conn = MySQLdb.connect(
+    db_conn = MySQLdb.connect(
         user=sys.argv[1],
         passwd=sys.argv[2],
         db=sys.argv[3],
@@ -14,7 +14,7 @@ if __name__ = "__main__":
         port=3306
     )
 
-    cur = conn.cursor()
+    cur = db_conn.cursor()
     query = """ SELECT * FROM states
                 WHERE name LIKE BINARY 'N%'
                 ORDER BY id ASC
@@ -27,4 +27,4 @@ if __name__ = "__main__":
         print(state)
 
     cur.close()
-    conn.close()
+    db_conn.close()
