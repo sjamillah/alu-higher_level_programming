@@ -23,7 +23,7 @@ if __name__ == "__main__":
 
     cursor = conn.cursor()
 
-    sql_com = """SELECT cities.name
+    query = """SELECT cities.name
           FROM cities
           INNER JOIN states ON states.id = cities.state_id
           WHERE states.name = %s
@@ -32,7 +32,7 @@ if __name__ == "__main__":
     cursor.execute(query, (state_name,))
     data = cursor.fetchall()
 
-    print(", ".join([state[1] for state in states]))
+    print(", ".join([city[0] for city in data]))
 
     cursor.close()
     conn.close()

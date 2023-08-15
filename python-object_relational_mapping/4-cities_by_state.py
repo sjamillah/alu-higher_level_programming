@@ -18,16 +18,17 @@ if __name__ == "__main__":
     )
     cursor = conn.cursor()
 
-    query = """SELECT c.id, c.name, s.name
-          FROM states s, cities c
-          WHERE c.state_id = s.id
-          ORDER BY c.id ASC"""
+    query = """SELECT cities.id, cities.name, states.name
+          FROM cities
+          INNER JOIN states
+          ON cities.state_id = states.id
+          ORDER BY cities.id ASC"""
 
     cursor.execute(query)
-    cities = cursor.fetchall()
+    states = cursor.fetchall()
 
-    for city in cities:
-        print(city)
+    for state in states:
+        print(state)
 
     cursor.close()
     conn.close()
