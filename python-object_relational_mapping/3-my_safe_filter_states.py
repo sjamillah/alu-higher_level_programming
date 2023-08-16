@@ -18,16 +18,11 @@ if __name__ = "__main__":
     )
 
     cur = db_conn.cursor()
-    query = """ SELECT * FROM states
-                WHERE name = %s
-                ORDER BY id ASC
-            """
-
-    cur.execute(query, (sys.argv[4],))
+    cur.execute("SELECT * FROM states
+                WHERE states.name = %s
+                ORDER BY states.id ASC".format(sys.argv[4])
+    )
     states = cur.fetchall()
 
-    for state in states:
-        print(state)
-
-    cur.close()
-    db_conn.close()
+    for row in states:
+        print(row)

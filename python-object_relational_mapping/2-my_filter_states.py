@@ -15,16 +15,15 @@ if __name__ = "__main__":
     )
 
     cur = db_conn.cursor()
-    query = """ SELECT * FROM states
-                WHERE name LIKE BINARY 'N%'
-                ORDER BY id ASC
-            """
-    
-    cur.execute(query, (sys.argv[4],))
+    cur.execute("SELECT * FROM states
+                WHERE states.name = '{:s}'
+                ORDER BY states.id ASC".format(sys.argv[4])
+    )
+
     states = cur.fetchall()
-    
-    for state in states:
-        print(state)
+    for row in states:
+        if row[1] == sys.argv[4]:
+        print(row)
 
     cur.close()
     db_conn.close()
