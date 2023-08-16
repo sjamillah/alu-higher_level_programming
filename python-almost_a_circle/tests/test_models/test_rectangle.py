@@ -97,7 +97,7 @@ class TestRectangle(unittest.TestCase):
         '''Width setter raises TypeError if width is not an integer
         '''
         with self.assertRaises(TypeError):
-            self.rectangle_t.width = "str"
+            self.rectangle_t.width = "2"
 
     def test_width_as_float(self):
         '''Width setter raises TypeError if width is not an integer
@@ -291,6 +291,10 @@ class TestRectangle(unittest.TestCase):
         self.rectangle_t.display()
         expected_output = "\n\n  ##\n  ##\n  ##\n"
         self.assertEqual(stdout.getvalue(), expected_output)
+
+     def test_rectangle_string_display(self):
+        self.assertEqual(Rectangle(4, 6, 2, 1, 12).__str__(), "[Rectangle] (12) 2/1 - 4/6")
+        self.assertEqual(Rectangle(5, 5, 1).__str__(), "[Rectangle] (23) 1/0 - 5/5")
 
     #-----------------------------------------------------
     #Testing magic __str__ function for rectangle instance
