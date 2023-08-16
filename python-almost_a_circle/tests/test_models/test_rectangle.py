@@ -1,344 +1,122 @@
 #!/usr/bin/python3
-'''Defines a class that specifies test cases for Rectangle class
-'''
-import unittest
-from models.rectangle import Rectangle
-from unittest.mock import patch
-from io import StringIO
+"""unittest for the models/rectangle.py
+"""
 
+import unittest
+import os
+from models.rectangle import Rectangle
 
 
 class TestRectangle(unittest.TestCase):
-    '''TestRectangle inherits from unittest class
-    '''
+    """
+    Our unittest class
 
-    def setUp(self):
-        '''Sets up a test environment before each test case if run
+    inheriting from the unittest.TestCase
 
-        '''
-        self.rectangle_t = Rectangle(2, 3, 1, 6, 13)
+    class.
+    """
 
-    #--------------------------------------------------------------------------
-    #Tests for id attribute inherited from Base class, which can be passed as an
-    #argument or is assigned by default to the number of existing instances
-    #--------------------------------------------------------------------------
+    def test_rectangle_for_type_error(self):
+        with self.assertRaises(TypeError):
+            Rectangle("1", 2)
+        with self.assertRaises(TypeError):
+            Rectangle(1, "2")
+        with self.assertRaises(TypeError):
+            Rectangle(1, 2, "3")
+        with self.assertRaises(TypeError):
+            Rectangle(1, 2, 3, "4")
 
-    def test_id(self):
-        '''Ensures id argument was assigned correctly
-        '''
-        self.assertEqual(self.rectangle_t.id, 13)
+    def test_reactangle_with_complete_correct_args(self):
+        self.base4 = Rectangle(1, 2, 3, 4, 5)
+        self.assertEqual(self.base4.id, 5)
 
-    #--------------------------------------------------------------------------
-    #The width argument only accepts positive integers, it does not accept zero
-    #or values less that zero, raises TypeError/ValueError
-    #TestCases that raise ValueError
-    #--------------------------------------------------------------------------
-
-    def test_width_negative_int(self):
-        '''Tests the setter for width argument
-        Ensure width validation raises the right error
-        '''
+    def test_rectangle_for_value_error(self):
         with self.assertRaises(ValueError):
-            self.rectangle_t.width = -2
-
-    def test_width_as_zero(self):
-        '''Tests the setter for width argument
-        Ensure width validation raises the right error
-        '''
+            Rectangle(-1, 2)
         with self.assertRaises(ValueError):
-            self.rectangle_t.width = 0
-
-    def test_width_as_negative_float(self):
-        '''Tests the setter for width argument
-        Ensure width validation raises the right error
-        '''
-        with self.assertRaises(TypeError):
-            self.rectangle_t.width = -3.2
-
-    #--------------------------------------------------------------------------
-    #The height argument only accepts positive integers, it does not accept zero
-    #or values less that zero, raises TypeError/ValueError
-    #TestCases that raise ValueError
-    #--------------------------------------------------------------------------
-
-    def test_height_as_negative_float(self):
-        '''Tests the setter for height argument
-        Ensure width validation raises the right error
-        '''
-        with self.assertRaises(TypeError):
-            self.rectangle_t.height = -3.2
-
-    def test_height_negative_int(self):
-        '''Tests the setter for height argument
-        Ensure height validation raises right error
-        '''
+            Rectangle(1, -2)
         with self.assertRaises(ValueError):
-            self.rectangle_t.height = -2
-
-    def test_height_as_zero(self):
-        '''Tests the setter for height argument
-        Ensure height validation raises right error
-        '''
+            Rectangle(0, 2)
         with self.assertRaises(ValueError):
-            self.rectangle_t.height = 0
+            Rectangle(1, 0)
+        with self.assertRaises(ValueError):
+            Rectangle(1, 2, -3)
+        with self.assertRaises(ValueError):
+            Rectangle(1, 2, 3, -4)
 
-    #--------------------------------------------------------------------------
-    #The width argument only accepts positive integers, it does not accept zero
-    #or values less that zero, raises TypeError/ValueError
-    #--------------------------------------------------------------------------
+    def test_rectangle_area(self):
+        self.assertEqual(Rectangle(3, 2).area(), 6)
+        self.assertEqual(Rectangle(2, 10).area(), 20)
+        self.assertEqual(Rectangle(8, 7, 0, 0, 12).area(), 56)
 
-    def test_width_as_positive_int(self):
-        '''Tests width setter by assigning positive int argument
-        '''
-        self.rectangle_t.width = 4 #Width was formerly equal to 2
-        self.assertEqual(self.rectangle_t.width, 4)
+    def test_rectangle_display(self):
+        self.assertEqual(Rectangle(4, 6).display(), 0)
+        self.assertEqual(Rectangle(2, 2).display(), 0)
+        self.assertEqual(Rectangle(2, 3, 2, 2).display(), 0)
+        self.assertEqual(Rectangle(3, 2, 1, 0).display(), 0)
+        self.assertEqual(Rectangle(3, 2, 4).display(), 0)
+        self.assertEqual(Rectangle(3, 2, 5).display(), 0)
+        self.assertEqual(Rectangle(3, 2, y=4).display(), 0)
+        self.assertEqual(Rectangle(3, 2, y=3).display(), 0)
 
-    def test_width_as_str(self):
-        '''Width setter raises TypeError if width is not an integer
-        '''
-        with self.assertRaises(TypeError):
-            self.rectangle_t.width = "2"
-
-    def test_width_as_float(self):
-        '''Width setter raises TypeError if width is not an integer
-        '''
-        with self.assertRaises(TypeError):
-            self.rectangle_t.width = 2.2
-
-    def test_width_as_inf(self):
-        '''Width setter raises TypeError if width is not an integer
-        '''
-        with self.assertRaises(TypeError):
-            self.rectangle_t.width = float('inf')
-
-    def test_width_as_nan(self):
-        '''Width setter raises TypeError if width is not an integer
-        '''
-        with self.assertRaises(TypeError):
-            self.rectangle_t.width = float('nan')
-
-    def test_width_as_bool(self):
-        '''Width setter raises TypeError if width is not an integer
-        '''
-        with self.assertRaises(TypeError):
-            self.rectangle_t.width = True
-
-    #--------------------------------------------------------------------------
-    #The height argument only accepts positive integers, it does not accept zero
-    #or values less that zero, raises TypeError/ValueError
-    #--------------------------------------------------------------------------
-
-    def test_height_as_positive_int(self):
-        '''Tests height setter by assigning positive int argument
-        '''
-        self.rectangle_t.height = 4 #Height was formerly equal to 3
-        self.assertEqual(self.rectangle_t.height, 4)
-
-    def test_height_as_str(self):
-        '''Height setter raises TypeError if height is not an integer
-        '''
-        with self.assertRaises(TypeError):
-            self.rectangle_t.height = "str"
-
-    def test_height_as_float(self):
-        '''Height setter raises TypeError if height is not an integer
-        '''
-        with self.assertRaises(TypeError):
-            self.rectangle_t.height = 2.2
-
-    def test_height_as_inf(self):
-        '''Height setter raises TypeError if height is not an integer
-        '''
-        with self.assertRaises(TypeError):
-            self.rectangle_t.height = float('inf')
-
-    def test_height_as_nan(self):
-        '''Height setter raises TypeError if height is not an integer
-        '''
-        with self.assertRaises(TypeError):
-            self.rectangle_t.height = float('nan')
-
-    def test_height_as_bool(self):
-        '''Height setter raises TypeError if height is not an integer
-        '''
-        with self.assertRaises(TypeError):
-            self.rectangle_t.height = True
-
-    #------------------------------------------------------
-    #The X argument only accepts positive integers and zero,
-    #otherwise it returns a TypeError/ValueError
-    #------------------------------------------------------
-
-    def test_x_as_positive_int(self):
-        '''Tests x setter by assigning positive int argument
-        '''
-        self.rectangle_t.x = 2 #X was formerly equal to 1
-        self.assertEqual(self.rectangle_t.x, 2)
-
-    def test_x_as_zero(self):
-        '''Tests x setter by assigning zero argument
-        '''
-        self.rectangle_t.x = 0 #X was formerly equal to 2
-        self.assertEqual(self.rectangle_t.x, 0)
-
-    def test_x_as_str(self):
-        '''X setter raises TypeError if x is not an integer
-        '''
-        with self.assertRaises(TypeError):
-            self.rectangle_t.x = "str"
-
-    def test_x_as_float(self):
-        '''X setter raises TypeError if x is not an integer
-        '''
-        with self.assertRaises(TypeError):
-            self.rectangle_t.x = 2.2
-
-    def test_x_as_inf(self):
-        '''X setter raises TypeError if x is not an integer
-        '''
-        with self.assertRaises(TypeError):
-            self.rectangle_t.x = float('inf')
-
-    def test_x_as_nan(self):
-        '''X setter raises TypeError if x is not an integer
-        '''
-        with self.assertRaises(TypeError):
-            self.rectangle_t.x = float('nan')
-
-    def test_x_as_bool(self):
-        '''X setter raises TypeError if x is not an integer
-        '''
-        with self.assertRaises(TypeError):
-            self.rectangle_t.x = True
-
-    #---------------------------------------------------
-    #The Y argument accepts only positive integers and 0
-    #returns TypeError/ValueError otherwise
-    #---------------------------------------------------
-
-    def test_y_as_positive_int(self):
-        '''Tests y setter by assigning positive int argument
-        '''
-        self.rectangle_t.y = 4 #Y was formerly equal to 6
-        self.assertEqual(self.rectangle_t.y, 4)
-
-    def test_y_as_zero(self):
-        '''Tests y setter by assigning zero argument
-        '''
-        self.rectangle_t.y = 0 #Y was formerly equal to 4
-        self.assertEqual(self.rectangle_t.y, 0)
-
-    def test_y_as_str(self):
-        '''Y setter raises TypeError if y is not an integer
-        '''
-        with self.assertRaises(TypeError):
-            self.rectangle_t.y = "str"
-
-    def test_y_as_float(self):
-        '''Y setter raises TypeError if y is not an integer
-        '''
-        with self.assertRaises(TypeError):
-            self.rectangle_t.y = 2.2
-
-    def test_y_as_inf(self):
-        '''Y setter raises TypeError if y is not an integer
-        '''
-        with self.assertRaises(TypeError):
-            self.rectangle_t.y = float('inf')
-
-    def test_y_as_nan(self):
-        '''Y setter raises TypeError if y is not an integer
-        '''
-        with self.assertRaises(TypeError):
-            self.rectangle_t.y = float('nan')
-
-    def test_y_as_bool(self):
-        '''Y setter raises TypeError if y is not an integer
-        '''
-        with self.assertRaises(TypeError):
-            self.rectangle_t.y = True
-
-    #-------------------------------------------------------------------------
-    # Area (public instance method) returns the area of the rectangle instance
-    #it is called from
-    #-------------------------------------------------------------------------
-
-    def test_area(self):
-        '''Checks that the right value is returned for the area of
-        rectangle instance
-        '''
-        self.rectangle_t.width = 6
-        self.rectangle_t.height = 4
-        self.assertEqual(self.rectangle_t.area(), 24)
-
-    #--------------------------------------------------------------------------
-    #display (public instance method) prints out the pictoral representation of
-    #rectange
-    #--------------------------------------------------------------------------
-
-    @patch('sys.stdout', new_callable = StringIO)
-    def test_display(self, stdout):
-        '''display() methods prints out a pictoral representation of a rectangle
-        using '#' character
-
-        Args:
-           stdout: New callable pointed to standard output
-        '''
-        self.rectangle_t.width = 2
-        self.rectangle_t.height = 3
-        self.rectangle_t.x = 2
-        self.rectangle_t.y = 2
-        self.rectangle_t.display()
-        expected_output = "\n\n  ##\n  ##\n  ##\n"
-        self.assertEqual(stdout.getvalue(), expected_output)
-
-     def test_rectangle_string_display(self):
+    def test_rectangle_string_display(self):
         self.assertEqual(Rectangle(4, 6, 2, 1, 12).__str__(), "[Rectangle] (12) 2/1 - 4/6")
         self.assertEqual(Rectangle(5, 5, 1).__str__(), "[Rectangle] (23) 1/0 - 5/5")
 
-    #-----------------------------------------------------
-    #Testing magic __str__ function for rectangle instance
-    #-----------------------------------------------------
+    def test_rectangle_update(self):
+        r1 = Rectangle(10, 10, 10, 10)
+        self.assertEqual(r1.update(), 1)
+        self.assertEqual(r1.update(89), 0)
+        self.assertEqual(r1.update(89, 2), 0)
+        self.assertEqual(r1.update(89, 2, 3), 0)
+        self.assertEqual(r1.update(89, 2, 3, 4), 0)
+        self.assertEqual(r1.update(89, 2, 3, 4, 5), 0)
+        self.assertEqual(r1.update(**{ 'id': 89 }), 0)
+        self.assertEqual(r1.update(**{ 'id': 89, 'width': 1 }), 0)
+        self.assertEqual(r1.update(**{ 'id': 89, 'width': 1, 'height': 2 }), 0)
+        self.assertEqual(r1.update(**{ 'id': 89, 'width': 1, 'height': 2, 'x': 3 }), 0)
+        self.assertEqual(r1.update(**{ 'id': 89, 'width': 1, 'height': 2, 'x': 3, 'y': 4 }), 0)
+        self.assertEqual(r1.update(22, x=1, height=2, y=3, width=4), 0)
+        self.assertEqual(r1.update(13, 2, x=1, height=2, y=3, width=4), 0)
+        self.assertEqual(r1.update(10, 3, 10, x=1, height=2, y=3, width=4), 0)
+        self.assertEqual(r1.update(35, 3, 4, 3, x=1, height=2, y=3, width=4), 0)
+        self.assertEqual(r1.update(25, 7, 5, 1, 2, x=1, height=2, y=3, width=4), 0)
 
-    def test_rectangle_str(self):
-        '''verifies str representation of rectangle instances
-        '''
-        self.assertEqual(str(self.rectangle_t), "[Rectangle] (13) 1/6 - 2/3")
-        self.rectangle_t.width = 6
-        self.rectangle_t.height = 4
-        self.rectangle_t.x = 1
-        self.rectangle_t.y = 1
-        self.rectangle_t.id = 11
-        self.assertEqual(str(self.rectangle_t), "[Rectangle] (11) 1/1 - 6/4")
+    def test_rectangle_to_dictionary(self):
+        r1 = Rectangle(10, 2, 1, 9)
+        self.assertDictEqual(r1.to_dictionary(), r1.to_dictionary())
 
-    #------------------------------------------------------------------
-    #update takes a list of positional no-keyword arguments, or keyword
-    #arguments and reassigns the rectangle instance attributes.
-    #if args exists and is not empty, kwargs must be skipped
-    #------------------------------------------------------------------
+    def test_rectangle_save_to_file(self):
+        r1 = Rectangle.save_to_file(None)
+        r2 = Rectangle.save_to_file([])
+        r3 = Rectangle.save_to_file([Rectangle(1, 2)])
+        self.assertEqual(r1, 1)
+        self.assertEqual(r2, 0)
+        self.assertEqual(r3, 0)
 
-    def test_update(self):
-        '''Tests the update method that reassigns the rectangle
-        instance attributes
-        '''
-        self.rectangle_t.update(1, 6, 4, 1, 1)
-        self.assertEqual(str(self.rectangle_t),"[Rectangle] (1) 1/1 - 6/4")
-        self.assertEqual(self.rectangle_t.area(), 24)
+    def test_rectangle_create(self):
+        r1 = Rectangle.create(**{ 'id': 89 })
+        r2 = Rectangle.create(**{ 'id': 89, 'width': 1 })
+        r3 = Rectangle.create(**{ 'id': 89, 'width': 1, 'height': 2 })
+        r4 = Rectangle.create(**{ 'id': 89, 'width': 1, 'height': 2, 'x': 3 })
+        r5 = Rectangle.create(**{ 'id': 89, 'width': 1, 'height': 2, 'x': 3, 'y': 4 })
+        self.assertEqual(r1.id, 89)
+        self.assertEqual(r2.id, 89)
+        self.assertEqual(r3.id, 89)
+        self.assertEqual(r4.id, 89)
+        self.assertEqual(r5.id, 89)
 
-    def test_update_args_kwargs(self):
-        '''Tests the update method with non keyword and
-        keyword arguments supplied
-        '''
-        self.rectangle_t.update(13, 8, 6, 1, 1, id=12,
-                                x=2, y=2, height=7, width=9)
-        self.assertEqual(str(self.rectangle_t), "[Rectangle] (13) 1/1 - 8/6")
+    def test_rectangle_load_to_file(self):
+        r1 = Rectangle(10, 7, 2, 8, 3)
+        list_rectangles_input = [r1]
+        Rectangle.save_to_file(list_rectangles_input)
+        list_rectangles_exist = Rectangle.load_from_file()
+        self.assertEqual(list_rectangles_exist[0].id, 3)
+        os.remove("Rectangle.json")
+        list_rectangles_non_exist = Rectangle.load_from_file()
+        self.assertEqual(list_rectangles_non_exist, [])
 
-    def test_update_kwargs(self):
-        '''Tests the update method with only keyword arguments supplied
-        '''
-        self.rectangle_t.update(id=12,
-                                x=2, y=2, height=7, width=9)
-        self.assertEqual(str(self.rectangle_t), "[Rectangle] (12) 2/2 - 9/7")
-
-if __name__ == "__main__":
-    unittest.main(verbosity=2)
+    def test_instance(self):
+        self.assertIsInstance(Rectangle(3, 4), Rectangle)
+        self.assertIsInstance(Rectangle(3, 2, 5), Rectangle)
+        self.assertIsInstance(Rectangle(4, 6, 7, 4), Rectangle)
