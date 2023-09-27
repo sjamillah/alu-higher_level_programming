@@ -2,6 +2,6 @@
 const [arg] = process.argv.slice(2);
 if (!arg) {
   console.log('No argument');
-}else {
+} else {
   console.log(arg);
 }
