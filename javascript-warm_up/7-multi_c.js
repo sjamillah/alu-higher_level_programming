@@ -4,7 +4,7 @@ let i = 0;
 
 if (!Number.isInteger(Number(x))) {
   console.log('Missing number of occurrences');
-}else {
+} else {
   x = Number(x);
   while (i < x) {
    console.log('C is fun');
