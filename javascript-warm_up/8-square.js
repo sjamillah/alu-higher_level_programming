@@ -8,6 +8,6 @@ if (Number.isNaN(size)) {
     for (let j = 0; j < size; j++) {
       s += 'X';
     }
-   console.log(s);
+    console.log(s);
   }
 }
